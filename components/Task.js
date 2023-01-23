@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Task = (props) => { //The props will be the task that will be passed to the Task component
+const Task = (props) => {
 
     return (
         <View style={styles.item}>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     itemLeft:{
         flexDirection: 'row',
         alignItems: 'center',
-        flexWrap: 'wrap', //This will make the text wrap to the next line
+        flexWrap: 'wrap', 
     },
     square:{
         width: 24,
