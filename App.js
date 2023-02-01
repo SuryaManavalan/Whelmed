@@ -22,6 +22,12 @@ export default function App() {
     setTaskItems([]);
   }
 
+  // const completeTask = (index) => {
+  //   let itemsCopy = [...taskItems];
+  //   itemsCopy.splice(index, 1);
+  //   setTaskItems(itemsCopy);
+  // }
+
   return (
     <View style={styles.container}>
       {/*Today's tasks*/}
