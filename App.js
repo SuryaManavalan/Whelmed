@@ -3,11 +3,10 @@ import { Image, Keyboard, KeyboardAvoidingView, StyleSheet, Text, TextInput, Tou
 import Task from './components/Task';
 import CardsSwipe from 'react-native-cards-swipe';
 
-const cardsData = ["Saab", "Volvo", "BMW"];
-
 export default function App() {
+  const cardsData = ["Do dishes", "Take out trash", "Finish homework 1"];
   const [task, setTask] = useState();
-  const [taskItems, setTaskItems] = useState([]);
+  const [taskItems, setTaskItems] = useState(cardsData);
 
   const handleAddTask = () => {
     Keyboard.dismiss();
@@ -15,10 +14,12 @@ export default function App() {
     setTask(null);
   }
 
-  const completeTask = (index) => {
-    let itemsCopy = [...taskItems];
-    itemsCopy.splice(index, 1);
-    setTaskItems(itemsCopy);
+  const reAdd = (item) =>{
+    setTaskItems([...taskItems, item]);
+  }
+
+  const resetTasks = () => {
+    setTaskItems([]);
   }
 
   return (
@@ -27,17 +28,20 @@ export default function App() {
       <Text style={styles.sectionTitle}>Today's tasks</Text>
 
       <CardsSwipe
-        cards={cardsData}
+        cards={taskItems}
         cardContainerStyle={styles.cardContainer}
-        renderCard={(card) => (
+        renderCard={(item) => (
           <View style={styles.card}>
-            <Text style={styles.cardText}>{card}</Text>
+            <Text style={styles.cardText}>{item}</Text>
           </View>
         )}
+        loop={false}
+        onSwipedLeft={(index) => reAdd(taskItems[index])}
+        onNoMoreCards={() => resetTasks()}
       />
 
-      <View style={styles.items}>
-        {/*Where all the tasks will go */}
+      {/*Where all the tasks will go */}
+      {/* <View style={styles.items}>
         {
           taskItems.map((item, index) => {
             return (
@@ -47,8 +51,7 @@ export default function App() {
             )
           })
         }
-
-      </View>
+      </View> */}
 
 
       {/* Write a task */}
@@ -118,12 +121,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     margin: '18%',
-    paddingBottom: '18%',
+    paddingBottom: '22%',
   },
   card: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#A2DFA4',
+    backgroundColor: '#fff',
     borderRadius: 20,
     shadowColor: '#000000',
     shadowOffset: {
